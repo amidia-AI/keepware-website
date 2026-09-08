@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Keepware Leaf-K Monogram -->
+  <g fill="currentColor">
+    <!-- Left Vertical Stem -->
+    <rect x="120" y="86" width="70" height="340" rx="35" />
+    
+    <!-- Top Leaf Blade -->
+    <path d="M190 286 C190 286 205 240 230 195 C255 150 310 110 400 90 C390 180 345 235 300 260 C255 285 205 292 190 286 Z" />
+    <!-- Top Leaf Vein Cutout -->
+    <path d="M226 238 Q290 180 380 108" stroke="#FAF9F5" stroke-width="8" stroke-linecap="round" fill="none" />
+
+    <!-- Bottom Leaf Blade -->
+    <path d="M190 286 C190 286 215 285 260 305 C305 325 350 370 388 422 C300 422 245 385 220 348 C195 311 190 286 190 286 Z" />
+    <!-- Bottom Leaf Vein Cutout -->
+    <path d="M224 316 Q280 350 365 410" stroke="#FAF9F5" stroke-width="8" stroke-linecap="round" fill="none" />
+  </g>
+</svg>

@@ -1,0 +1,6 @@
+{
+  "name": "keepware",
+  "description": "Curated home for standalone, local-first perpetual software. Featuring TypeMaster — on-device speech-to-text with zero subscriptions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
