@@ -3,22 +3,12 @@ import {
   X,
   ShieldCheck,
   Check,
-  Key,
   Send,
-  Mail,
-  Sparkles,
   Cpu,
-  HardDrive,
-  Mic,
-  Monitor,
-  CheckCircle2,
-  Lock,
-  AppWindow
+  Mic
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import { TYPEMASTER_APP } from '../data/appsData';
+import { motion } from 'motion/react';
 import { AppItem } from '../types';
-import { KeepwareLogo } from './KeepwareLogo';
 
 // ========================
 // APP DETAILS & REQUIREMENTS MODAL
@@ -350,115 +340,6 @@ export const SubmitAppModal: React.FC<SubmitAppModalProps> = ({ isOpen, onClose 
               className="py-3 px-6 surface-dark text-gr-base font-bold rounded-xl cursor-pointer"
             >
               Close
-            </button>
-          </div>
-        )}
-
-      </div>
-    </div>
-  );
-};
-
-// ========================
-// AUTH & LICENSE LOOKUP MODAL
-// ========================
-interface AuthModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
-  const [email, setEmail] = useState('');
-  const [sent, setSent] = useState(false);
-  const [isLookingUp, setIsLookingUp] = useState(false);
-
-  if (!isOpen) return null;
-
-  const handleLookup = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || isLookingUp) return;
-    setIsLookingUp(true);
-    try {
-      const res = await fetch(`/api/licenses?email=${encodeURIComponent(email)}`);
-      if (!res.ok) throw new Error('Lookup failed');
-      setSent(true);
-    } catch (err) {
-      console.error('License lookup failed:', err);
-    } finally {
-      setIsLookingUp(false);
-    }
-  };
-
-  const handleClose = () => {
-    setSent(false);
-    setEmail('');
-    onClose();
-  };
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-4 sm:p-6 bg-bg/65 backdrop-blur-xs overflow-y-auto">
-      <div className="surface-light rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-border relative animate-in fade-in zoom-in-95 duration-200 my-8">
-        
-        <button
-          onClick={handleClose}
-          className="absolute right-5 top-5 text-muted hover:underline p-1.5 rounded-full hover:bg-border transition-colors cursor-pointer"
-        >
-          <X className="w-5 h-5" />
-        </button>
-
-        {!sent ? (
-          <div>
-            <div className="w-11 h-11 rounded-2xl surface-dark flex items-center justify-center p-2 mb-3 shadow-xs">
-              <KeepwareLogo className="w-full h-full " veinColor="var(--bg)" />
-            </div>
-
-            <h3 className="font-serif-display text-gr-sub font-bold mb-1">
-              Find Your License Keys
-            </h3>
-            <p className="text-gr-base mb-5">
-              Enter the email address you used at checkout to receive your perpetual license keys and direct installer download links.
-            </p>
-
-            <form onSubmit={handleLookup} className="space-y-4">
-              <div>
-                <label className="block text-gr-base font-semibold mb-1">
-                  Purchase Email:
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="alex@example.com"
-                  className="w-full px-4 py-2.5 surface-light border border-border rounded-xl text-gr-base focus:outline-none focus:border-heading-light"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full py-3.5 surface-dark hover:bg-bg font-bold text-gr-base rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <Mail className="w-4 h-4 " />
-                <span>Send My License Links</span>
-              </button>
-            </form>
-          </div>
-        ) : (
-          <div className="text-center py-4">
-            <div className="w-12 h-12 rounded-full bg-border flex items-center justify-center mx-auto mb-3">
-              <Check className="w-6 h-6" />
-            </div>
-            <h3 className="font-serif-display text-gr-sub font-bold mb-1">
-              License Link Dispatched!
-            </h3>
-            <p className="text-gr-base mb-5">
-              We've dispatched all active keys associated with <span className="font-semibold ">{email}</span>. Check your inbox!
-            </p>
-            <button
-              onClick={handleClose}
-              className="py-3 px-6 surface-dark text-gr-base font-bold rounded-xl cursor-pointer"
-            >
-              Done
             </button>
           </div>
         )}

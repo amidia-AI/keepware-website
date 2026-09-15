@@ -10,15 +10,15 @@ import { FaqSection } from '../components/typemaster/FaqSection';
 import { FinalCta } from '../components/typemaster/FinalCta';
 
 interface TypeMasterPageProps {
-  onOpenBuyModal: () => void;
+  onDownload: () => void;
   onOpenDetailsModal?: () => void;
 }
 
-export default function TypeMasterPage({ onOpenBuyModal, onOpenDetailsModal }: TypeMasterPageProps) {
+export default function TypeMasterPage({ onDownload, onOpenDetailsModal }: TypeMasterPageProps) {
   // Use anchor links for modal instead if preferred, but keeping prop drilling for simplicity
   return (
     <div className="flex flex-col w-full relative">
-      <Hero onOpenBuyModal={onOpenBuyModal} onOpenDetailsModal={onOpenDetailsModal || (() => {})} />
+      <Hero onDownload={onDownload} onOpenDetailsModal={onOpenDetailsModal || (() => {})} />
       <ProofSection />
       <TheProblem />
       <ComparisonTable />
@@ -26,7 +26,7 @@ export default function TypeMasterPage({ onOpenBuyModal, onOpenDetailsModal }: T
       <UsageGuide />
       <WhyLocalFirst />
       <FaqSection />
-      <FinalCta onOpenBuyModal={onOpenBuyModal} />
+      <FinalCta onDownload={onDownload} />
     </div>
   );
 }

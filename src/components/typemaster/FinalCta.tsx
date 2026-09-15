@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import { PricingBlock } from './PricingBlock';
 
 interface FinalCtaProps {
-  onOpenBuyModal: () => void;
+  onDownload: () => void;
 }
 
-export const FinalCta: React.FC<FinalCtaProps> = ({ onOpenBuyModal }) => {
+export const FinalCta: React.FC<FinalCtaProps> = ({ onDownload }) => {
   return (
     <Surface tone="dark" className="relative py-24 sm:py-32 px-4 sm:px-6 overflow-hidden flex flex-col justify-center items-center">
       <div className="noise-overlay"></div>
@@ -18,7 +18,7 @@ export const FinalCta: React.FC<FinalCtaProps> = ({ onOpenBuyModal }) => {
           You buy it, you download it, it works. If keepware ever disappears, your copy keeps running — offline activation means it never needs us again.
         </p>
         
-        <PricingBlock onOpenBuyModal={onOpenBuyModal} />
+        <PricingBlock onDownload={onDownload} />
       </div>
     </Surface>
   );

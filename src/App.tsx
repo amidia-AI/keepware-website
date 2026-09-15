@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { AppDetailsModal, AuthModal } from './components/Modals';
+import { AppDetailsModal } from './components/Modals';
 import { TYPEMASTER_APP } from './data/appsData';
 import { downloadTypeMaster } from './lib/typemasterDownload';
 
@@ -40,7 +40,6 @@ function ScrollManager() {
 
 export default function App() {
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   return (
     <BrowserRouter>
@@ -49,15 +48,14 @@ export default function App() {
         <div className="noise-overlay"></div>
         {/* Sticky Floating Navbar */}
         <Navbar
-          onOpenBuyModal={downloadTypeMaster}
-          onOpenAuthModal={() => setIsAuthModalOpen(true)}
+          onDownload={downloadTypeMaster}
         />
         <main className="flex-1 relative z-10 pb-24 sm:pb-0">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/typemaster" element={
               <TypeMasterPage 
-                onOpenBuyModal={downloadTypeMaster}
+                onDownload={downloadTypeMaster}
                 onOpenDetailsModal={() => setIsDetailsModalOpen(true)}
               />
             } />
@@ -68,9 +66,7 @@ export default function App() {
             <Route path="/docs/known-issues" element={<KnownIssuesPage />} />
           </Routes>
         </main>
-        <Footer
-          onOpenAuthModal={() => setIsAuthModalOpen(true)}
-        />
+        <Footer />
         
         {/* Global Modals */}
         <AppDetailsModal
@@ -81,10 +77,6 @@ export default function App() {
             setIsDetailsModalOpen(false);
             downloadTypeMaster();
           }}
-        />
-        <AuthModal
-          isOpen={isAuthModalOpen}
-          onClose={() => setIsAuthModalOpen(false)}
         />
       </div>
     </BrowserRouter>

@@ -1,13 +1,9 @@
 import React from 'react';
-import { User, Send, Code2, AppWindow, Route, HelpCircle, FileWarning } from 'lucide-react';
+import { Send, Code2, AppWindow, Route, HelpCircle, FileWarning } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { KeepwareLogo } from './KeepwareLogo';
 
-interface FooterProps {
-  onOpenAuthModal: () => void;
-}
-
-export const Footer: React.FC<FooterProps> = ({ onOpenAuthModal }) => {
+export const Footer: React.FC = () => {
   return (
     <footer className="surface-dark border-t border-border pt-16 pb-24 sm:pb-12 px-4 sm:px-6 text-gr-base">
       <div className="max-w-5xl mx-auto">
@@ -102,15 +98,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAuthModal }) => {
                   <FileWarning className="w-4 h-4" />
                   <span>Known Issues</span>
                 </Link>
-              </li>
-              <li>
-                <button
-                  onClick={onOpenAuthModal}
-                  className="hover:underline text-left organic-transition flex items-center gap-1.5 cursor-pointer focus-ring rounded-sm"
-                >
-                  <User className="w-4 h-4" />
-                  <span>License Key Lookup</span>
-                </button>
               </li>
             </ul>
           </div>

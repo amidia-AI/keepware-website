@@ -85,13 +85,3 @@ export interface AppSubmission {
   status: 'pending';
 }
 
-export interface Order {
-  id: string;
-  appId: string;
-  appName: string;
-  priceUsd: number;
-  email: string;
-  licenseKey: string;
-  createdAt: string;
-  source: 'checkout' | 'webhook';
-}

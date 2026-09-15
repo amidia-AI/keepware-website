@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import { INITIAL_UPDATE_REQUESTS } from "../src/data/appsData";
-import type { AppSubmission, Order, ProjectRequest, UpdateRequestItem } from "../src/types";
+import type { AppSubmission, ProjectRequest, UpdateRequestItem } from "../src/types";
 import { readDb, writeDb } from "./store";
 
 export interface FeatureRequestRecord extends UpdateRequestItem {
@@ -17,9 +17,7 @@ export interface DbSchema {
   featureRequests: FeatureRequestRecord[];
   projectRequests: ProjectRequest[];
   appSubmissions: AppSubmission[];
-  orders: Order[];
   subscribers: Subscriber[];
-  processedWebhookEventIds: string[];
 }
 
 function seedDb(): DbSchema {
@@ -27,9 +25,7 @@ function seedDb(): DbSchema {
     featureRequests: INITIAL_UPDATE_REQUESTS.map((item) => ({ ...item, voters: [] })),
     projectRequests: [],
     appSubmissions: [],
-    orders: [],
     subscribers: [],
-    processedWebhookEventIds: [],
   };
 }
 
@@ -40,9 +36,7 @@ const db: DbSchema = {
   featureRequests: loaded.featureRequests ?? [],
   projectRequests: loaded.projectRequests ?? [],
   appSubmissions: loaded.appSubmissions ?? [],
-  orders: loaded.orders ?? [],
   subscribers: loaded.subscribers ?? [],
-  processedWebhookEventIds: loaded.processedWebhookEventIds ?? [],
 };
 
 function persist(): Promise<void> {
@@ -135,26 +129,6 @@ export async function createAppSubmission(
   return record;
 }
 
-// ---- Orders / licenses ----
-
-export async function createOrder(
-  input: Omit<Order, "id" | "createdAt">
-): Promise<Order> {
-  const record: Order = {
-    id: `ord-${crypto.randomUUID()}`,
-    createdAt: new Date().toISOString(),
-    ...input,
-  };
-  db.orders.unshift(record);
-  await persist();
-  return record;
-}
-
-export function findOrdersByEmail(email: string): Order[] {
-  const normalized = email.trim().toLowerCase();
-  return db.orders.filter((o) => o.email.toLowerCase() === normalized);
-}
-
 // ---- Subscribers ----
 
 export async function createSubscriber(email: string): Promise<{ subscriber: Subscriber; alreadySubscribed: boolean }> {
@@ -173,14 +147,3 @@ export async function createSubscriber(email: string): Promise<{ subscriber: Sub
   return { subscriber, alreadySubscribed: false };
 }
 
-export function hasProcessedWebhookEvent(eventId: string): boolean {
-  return db.processedWebhookEventIds.includes(eventId);
-}
-
-export async function markWebhookEventProcessed(eventId: string): Promise<void> {
-  db.processedWebhookEventIds.push(eventId);
-  if (db.processedWebhookEventIds.length > 1000) {
-    db.processedWebhookEventIds = db.processedWebhookEventIds.slice(-1000);
-  }
-  await persist();
-}

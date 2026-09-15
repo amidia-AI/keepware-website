@@ -1,16 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Menu, X, ChevronDown, Code2, HelpCircle, Route, FileWarning, User } from 'lucide-react';
+import { Menu, X, ChevronDown, Code2, HelpCircle, Route, FileWarning } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link, useLocation } from 'react-router-dom';
 import { KeepwareLogo } from './KeepwareLogo';
 import { FEATURED_APP } from '../data/appsData';
 
 interface NavbarProps {
-  onOpenBuyModal: () => void;
-  onOpenAuthModal?: () => void;
+  onDownload: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenBuyModal, onOpenAuthModal }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onDownload }) => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
@@ -65,16 +64,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBuyModal, onOpenAuthModal 
       to: '/docs/known-issues',
       icon: FileWarning,
       type: 'link' as const,
-    },
-    {
-      label: 'License Key Lookup',
-      icon: User,
-      type: 'action' as const,
-      onClick: () => {
-        setIsServicesOpen(false);
-        setIsMobileOpen(false);
-        onOpenAuthModal?.();
-      },
     },
   ];
 
@@ -146,30 +135,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBuyModal, onOpenAuthModal 
                     <div className="flex flex-col gap-0.5">
                       {serviceItems.map((item) => {
                         const Icon = item.icon;
-                        if (item.type === 'link' && item.to) {
-                          return (
-                            <Link
-                              key={item.label}
-                              to={item.to}
-                              onClick={() => setIsServicesOpen(false)}
-                              className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-gr-base font-medium text-muted hover:text-text hover:bg-border organic-transition focus-ring"
-                            >
-                              <Icon className="w-4 h-4 shrink-0 text-muted" />
-                              <span>{item.label}</span>
-                            </Link>
-                          );
-                        }
-
                         return (
-                          <button
+                          <Link
                             key={item.label}
-                            type="button"
-                            onClick={item.onClick}
-                            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-gr-base font-medium text-muted hover:text-text hover:bg-border organic-transition text-left cursor-pointer focus-ring"
+                            to={item.to}
+                            onClick={() => setIsServicesOpen(false)}
+                            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-gr-base font-medium text-muted hover:text-text hover:bg-border organic-transition focus-ring"
                           >
                             <Icon className="w-4 h-4 shrink-0 text-muted" />
                             <span>{item.label}</span>
-                          </button>
+                          </Link>
                         );
                       })}
                     </div>
@@ -184,7 +159,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBuyModal, onOpenAuthModal 
             {/* Desktop Action Button */}
             {isProductPage ? (
               <button
-                onClick={onOpenBuyModal}
+                onClick={onDownload}
                 className="hidden sm:flex bg-btn-bg hover:opacity-90 text-gr-base font-semibold px-5 py-2 rounded-full organic-transition shadow-sm items-center justify-center focus-ring text-btn-text"
               >
                 Download {FEATURED_APP.name} — Free
@@ -275,30 +250,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBuyModal, onOpenAuthModal 
                       >
                         {serviceItems.map((item) => {
                           const Icon = item.icon;
-                          if (item.type === 'link' && item.to) {
-                            return (
-                              <Link
-                                key={item.label}
-                                to={item.to}
-                                onClick={() => setIsMobileOpen(false)}
-                                className="flex items-center gap-2.5 py-2 px-3 rounded-lg hover:bg-border text-muted hover:text-text organic-transition text-sm"
-                              >
-                                <Icon className="w-4 h-4 shrink-0 text-muted" />
-                                <span>{item.label}</span>
-                              </Link>
-                            );
-                          }
-
                           return (
-                            <button
+                            <Link
                               key={item.label}
-                              type="button"
-                              onClick={item.onClick}
-                              className="w-full flex items-center gap-2.5 py-2 px-3 rounded-lg hover:bg-border text-muted hover:text-text organic-transition text-left text-sm cursor-pointer"
+                              to={item.to}
+                              onClick={() => setIsMobileOpen(false)}
+                              className="flex items-center gap-2.5 py-2 px-3 rounded-lg hover:bg-border text-muted hover:text-text organic-transition text-sm"
                             >
                               <Icon className="w-4 h-4 shrink-0 text-muted" />
                               <span>{item.label}</span>
-                            </button>
+                            </Link>
                           );
                         })}
                       </motion.div>
@@ -311,7 +272,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBuyModal, onOpenAuthModal 
                     <button
                       onClick={() => {
                         setIsMobileOpen(false);
-                        onOpenBuyModal();
+                        onDownload();
                       }}
                       className="w-full bg-btn-bg text-btn-text font-bold py-2.5 rounded-full shadow-md text-center"
                     >

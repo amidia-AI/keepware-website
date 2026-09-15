@@ -4,12 +4,12 @@ import { motion } from 'motion/react';
 import { Chip } from '../Chip';
 
 interface HeroProps {
-  onOpenBuyModal: () => void;
+  onDownload: () => void;
   onOpenDetailsModal?: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({
-  onOpenBuyModal,
+  onDownload,
 }) => {
   const [, setImageLoaded] = useState<boolean>(true);
 
@@ -97,7 +97,7 @@ export const Hero: React.FC<HeroProps> = ({
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={onOpenBuyModal}
+              onClick={onDownload}
               className="w-full sm:w-auto px-6 sm:px-8 py-3.5 bg-[#E8A33D] hover:bg-[#d99530] text-[#111815] font-bold text-sm sm:text-base rounded-full shadow-md organic-transition focus-ring cursor-pointer text-center inline-flex items-center justify-center gap-2 select-none"
             >
               <span>Download TypeMaster</span>

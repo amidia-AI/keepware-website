@@ -6,8 +6,6 @@ import { requestLogger, jsonErrorHandler } from "./server/http";
 import featureRequestsRouter from "./server/routes/featureRequests";
 import projectRequestsRouter from "./server/routes/projectRequests";
 import appSubmissionsRouter from "./server/routes/appSubmissions";
-import checkoutRouter from "./server/routes/checkout";
-import webhookRouter from "./server/routes/webhook";
 import subscribersRouter from "./server/routes/subscribers";
 
 async function startServer() {
@@ -16,19 +14,11 @@ async function startServer() {
 
   app.use(requestLogger);
 
-  app.use(
-    express.json({
-      verify: (req, _res, buf) => {
-        (req as express.Request & { rawBody?: Buffer }).rawBody = buf;
-      },
-    })
-  );
+  app.use(express.json());
 
   app.use("/api", featureRequestsRouter);
   app.use("/api", projectRequestsRouter);
   app.use("/api", appSubmissionsRouter);
-  app.use("/api", checkoutRouter);
-  app.use("/api", webhookRouter);
   app.use("/api", subscribersRouter);
 
   // Any unmatched /api/* request must return JSON, never the SPA shell.

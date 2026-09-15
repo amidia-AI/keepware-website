@@ -2,10 +2,10 @@ import React from 'react';
 import { motion } from 'motion/react';
 
 interface PricingBlockProps {
-  onOpenBuyModal: () => void;
+  onDownload: () => void;
 }
 
-export const PricingBlock: React.FC<PricingBlockProps> = ({ onOpenBuyModal }) => {
+export const PricingBlock: React.FC<PricingBlockProps> = ({ onDownload }) => {
   return (
     <div className="flex flex-col items-center text-center">
       <div className="flex flex-col gap-2 mb-6">
@@ -23,7 +23,7 @@ export const PricingBlock: React.FC<PricingBlockProps> = ({ onOpenBuyModal }) =>
       <motion.button
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        onClick={onOpenBuyModal}
+        onClick={onDownload}
         className="w-full sm:w-auto px-8 sm:px-10 py-4 bg-btn-bg hover:opacity-90 text-btn-text font-bold text-base sm:text-lg rounded-full shadow-lg organic-transition focus-ring mb-4 inline-flex items-center justify-center gap-2 select-none cursor-pointer"
       >
         <span>Download TypeMaster</span>
