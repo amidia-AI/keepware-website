@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { Surface } from '../Surface';
 import { Chip } from '../Chip';
 import { TYPEMASTER_APP } from '../../data/appsData';
+import { TYPEMASTER_MSI_URL } from '../../lib/typemasterDownload';
 
 export const UsageGuide: React.FC = () => {
   return (
@@ -17,7 +18,15 @@ export const UsageGuide: React.FC = () => {
             From installer to first sentence.
           </h2>
           <p className="text-muted text-base sm:text-lg leading-relaxed">
-            Six steps to get TypeMaster {TYPEMASTER_APP.version} dictating into every app on your machine.
+            Six steps to get TypeMaster {TYPEMASTER_APP.version} dictating into every app on your machine. Rolling
+            it out to multiple machines?{' '}
+            <a
+              href={TYPEMASTER_MSI_URL}
+              className="underline underline-offset-2 hover:text-text organic-transition"
+            >
+              Download the .msi installer
+            </a>{' '}
+            instead.
           </p>
         </div>
 

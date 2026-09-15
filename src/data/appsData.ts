@@ -30,9 +30,9 @@ export const TYPEMASTER_APP: AppItem = {
     {
       id: 'install',
       step: '01',
-      title: 'Install and activate',
-      description: 'Run the 128 MB installer and paste the licence key emailed to you at purchase. Activation is a one-time check — after that TypeMaster never phones home again.',
-      hint: 'No account to create. The key is tied to your licence, not to a login.'
+      title: 'Download and install — free',
+      description: 'Download the 128 MB installer and run it. No account, email, or licence key needed — TypeMaster is free to keep. If Windows SmartScreen shows a warning (the installer is unsigned), click "More info" > "Run anyway".',
+      hint: 'Prefer an .msi for scripted or managed rollouts? A .msi build is on the same GitHub release.'
     },
     {
       id: 'model',
