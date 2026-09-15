@@ -39,7 +39,7 @@ export const ProofSection: React.FC = () => {
         
         {/* Verifiable Facts Strip */}
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 mb-14">
-          <Chip surface="light">128 MB installer</Chip>
+          <Chip surface="light">20.6 MB installer</Chip>
           <Chip surface="light">1.9 GB local model</Chip>
           <Chip surface="light" icon={<Activity className="w-4 h-4 text-[#17532F]" />}>
             Zero outbound network calls

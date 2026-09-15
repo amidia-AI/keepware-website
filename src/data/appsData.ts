@@ -14,7 +14,7 @@ export const TYPEMASTER_APP: AppItem = {
   developer: 'keepware Labs',
   accentColor: 'var(--text)',
   badge: 'Featured Product',
-  size: '128 MB (Installer) • 1.9 GB (Local Model)',
+  size: '20.6 MB (Installer) • 1.9 GB (Local Model)',
   releasedYear: 2026,
   updatesIncluded: 'Lifetime core binary updates + continuous local model fine-tunes included',
   features: [
@@ -31,7 +31,7 @@ export const TYPEMASTER_APP: AppItem = {
       id: 'install',
       step: '01',
       title: 'Download and install — free',
-      description: 'Download the 128 MB installer and run it. No account, email, or licence key needed — TypeMaster is free to keep. If Windows SmartScreen shows a warning (the installer is unsigned), click "More info" > "Run anyway".',
+      description: 'Download the 20.6 MB installer and run it. No account, email, or licence key needed — TypeMaster is free to keep. If Windows SmartScreen shows a warning (the installer is unsigned), click "More info" > "Run anyway".',
       hint: 'Prefer an .msi for scripted or managed rollouts? A .msi build is on the same GitHub release.'
     },
     {

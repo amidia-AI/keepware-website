@@ -9,8 +9,8 @@
 const RELEASE_TAG = 'v0.9.6';
 const RELEASE_BASE = `https://github.com/amidia-AI/keepware-website/releases/download/${RELEASE_TAG}`;
 
-export const TYPEMASTER_SETUP_EXE_URL = `${RELEASE_BASE}/TypeMaster-0.9.6-x64-setup.exe`;
-export const TYPEMASTER_MSI_URL = `${RELEASE_BASE}/TypeMaster-0.9.6-x64-en-US.msi`;
+export const TYPEMASTER_SETUP_EXE_URL = `${RELEASE_BASE}/Type.Master.V1_0.9.6_x64-setup.exe`;
+export const TYPEMASTER_MSI_URL = `${RELEASE_BASE}/Type.Master.V1_0.9.6_x64_en-US.msi`;
 
 /**
  * Starts the TypeMaster installer download in a new tab so an in-flight
