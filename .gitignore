@@ -7,3 +7,7 @@ coverage/
 .env*
 !.env.example
 server/data/*.json
+
+# Installer binaries are distributed via GitHub Releases, not committed.
+# They also exceed Cloudflare Pages' 25 MiB per-file limit.
+public/Downloads/

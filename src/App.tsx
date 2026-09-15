@@ -4,7 +4,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { AppDetailsModal, AuthModal } from './components/Modals';
 import { TYPEMASTER_APP } from './data/appsData';
-import { openTypeMasterCheckout } from './lib/lemonSqueezy';
+import { downloadTypeMaster } from './lib/typemasterDownload';
 
 // Pages
 import HomePage from './pages/HomePage';
@@ -49,7 +49,7 @@ export default function App() {
         <div className="noise-overlay"></div>
         {/* Sticky Floating Navbar */}
         <Navbar
-          onOpenBuyModal={openTypeMasterCheckout}
+          onOpenBuyModal={downloadTypeMaster}
           onOpenAuthModal={() => setIsAuthModalOpen(true)}
         />
         <main className="flex-1 relative z-10 pb-24 sm:pb-0">
@@ -57,7 +57,7 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/typemaster" element={
               <TypeMasterPage 
-                onOpenBuyModal={openTypeMasterCheckout}
+                onOpenBuyModal={downloadTypeMaster}
                 onOpenDetailsModal={() => setIsDetailsModalOpen(true)}
               />
             } />
@@ -79,7 +79,7 @@ export default function App() {
           onClose={() => setIsDetailsModalOpen(false)}
           onBuy={() => {
             setIsDetailsModalOpen(false);
-            openTypeMasterCheckout();
+            downloadTypeMaster();
           }}
         />
         <AuthModal

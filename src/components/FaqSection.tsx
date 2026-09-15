@@ -13,16 +13,12 @@ const FAQS: FaqItem[] = [
     a: 'TypeMaster packages a heavily optimized neural speech recognition model that runs natively via NVIDIA CUDA / DirectML (Windows). When you press your global hotkey, the audio stream is converted into text tokens entirely inside your local system RAM. Your microphone audio never touches the internet.'
   },
   {
-    q: 'What is the perpetual license policy? Are there recurring subscriptions?',
-    a: 'Zero subscriptions. Ever. You pay $7.00 once (launch price, regular $23.99) and own your TypeMaster license for life. This includes all future patch releases, performance improvements, and local model weight fine-tunes. You receive standalone installer binaries with no DRM lock-in.'
+    q: 'Is TypeMaster really free? Are there recurring subscriptions?',
+    a: 'Yes, completely free. Zero subscriptions. Ever. Download TypeMaster and use it for life, including all future patch releases, performance improvements, and local model weight fine-tunes. You receive standalone installer binaries with no DRM lock-in.'
   },
   {
-    q: 'Can I use my TypeMaster license on multiple personal computers?',
-    a: 'Yes. A single personal license allows you to activate TypeMaster on up to 3 personal machines that you own (e.g. your desktop workstation, personal laptop, and work machine).'
-  },
-  {
-    q: 'What payment methods are supported for the $7.00 purchase?',
-    a: 'We support PayPal checkout. You can pay securely using your PayPal account balance, linked bank account, or debit and credit cards through PayPal.'
+    q: 'Can I use TypeMaster on multiple personal computers?',
+    a: 'Yes. You can install TypeMaster on as many personal machines as you own (e.g. your desktop workstation, personal laptop, and work machine).'
   },
   {
     q: 'What if TypeMaster does not run smoothly on my specific hardware setup?',

@@ -13,11 +13,10 @@ export const PricingBlock: React.FC<PricingBlockProps> = ({ onOpenBuyModal }) =>
           Cloud dictation: $12/month — forever
         </p>
         <div className="flex items-center justify-center gap-3 mb-1">
-          <span className="text-2xl sm:text-3xl text-muted line-through decoration-muted font-bold">$23.99</span>
-          <span className="text-3xl sm:text-4xl font-bold text-text">TypeMaster: $7.00 — once</span>
+          <span className="text-3xl sm:text-4xl font-bold text-text">TypeMaster: Free</span>
         </div>
         <p className="text-muted font-medium text-sm">
-          Launch Price • 3 years of cloud = $432. TypeMaster = $7.00 forever.
+          3 years of cloud dictation = $432. TypeMaster = Free forever.
         </p>
       </div>
 
@@ -27,10 +26,9 @@ export const PricingBlock: React.FC<PricingBlockProps> = ({ onOpenBuyModal }) =>
         onClick={onOpenBuyModal}
         className="w-full sm:w-auto px-8 sm:px-10 py-4 bg-btn-bg hover:opacity-90 text-btn-text font-bold text-base sm:text-lg rounded-full shadow-lg organic-transition focus-ring mb-4 inline-flex items-center justify-center gap-2 select-none cursor-pointer"
       >
-        <span>Get TypeMaster</span>
+        <span>Download TypeMaster</span>
         <span className="text-btn-text/40 font-bold">·</span>
-        <span className="line-through text-black/45 text-sm font-normal">$23.99</span>
-        <span className="font-extrabold">$7.00 once</span>
+        <span className="font-extrabold">Free</span>
       </motion.button>
 
       <p className="text-sm font-medium text-muted">

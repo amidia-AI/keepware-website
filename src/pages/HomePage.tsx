@@ -112,8 +112,7 @@ export default function HomePage() {
               
               <div className="flex items-center justify-between border-t border-white/15 pt-4 mt-2">
                 <div className="flex items-center gap-1.5">
-                  <span className="line-through text-white/50 text-sm">$23.99</span>
-                  <span className="font-bold text-base text-white">$7.00 one-time</span>
+                  <span className="font-bold text-base text-white">Free</span>
                 </div>
                 <span className="flex items-center gap-1.5 text-sm font-bold text-[#E8A33D] group-hover:translate-x-1 organic-transition">
                   View details <ArrowRight className="w-4 h-4" />

@@ -21,196 +21,6 @@ import { AppItem } from '../types';
 import { KeepwareLogo } from './KeepwareLogo';
 
 // ========================
-// BUY / CHECKOUT MODAL ($19 USD)
-// ========================
-interface BuyModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-declare global {
-  interface Window {
-    LemonSqueezy?: { Url?: { Open: (url: string) => void } };
-  }
-}
-
-export const BuyModal: React.FC<BuyModalProps> = ({
-  isOpen,
-  onClose,
-}) => {
-  const [email, setEmail] = useState('');
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [checkoutOpened, setCheckoutOpened] = useState(false);
-  const [error, setError] = useState('');
-
-  if (!isOpen) return null;
-
-  const app = TYPEMASTER_APP;
-  const priceDisplay = `$${app.priceUsd.toFixed(2)}`;
-
-  const handlePurchase = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || isProcessing) return;
-
-    setIsProcessing(true);
-    setError('');
-    try {
-      const res = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ appId: app.id, email }),
-      });
-      const body = await res.json().catch(() => null);
-      if (!res.ok) {
-        throw new Error(body?.error?.message || 'Could not start checkout. Please try again.');
-      }
-      const checkoutUrl: string | undefined = body?.checkoutUrl;
-      if (!checkoutUrl) throw new Error('Checkout provider returned no URL. Please try again.');
-
-      const lemon = window.LemonSqueezy;
-      if (lemon?.Url?.Open) {
-        lemon.Url.Open(checkoutUrl);
-        setCheckoutOpened(true);
-      } else {
-        // lemon.js unavailable (blocked/offline): fall back to full redirect.
-        window.location.assign(checkoutUrl);
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
-      console.error('Purchase failed:', err);
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
-  const handleResetAndClose = () => {
-    setCheckoutOpened(false);
-    setIsProcessing(false);
-    setEmail('');
-    setError('');
-    onClose();
-  };
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-4 sm:p-6 bg-bg/65 backdrop-blur-xs overflow-y-auto">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9, y: 15 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.9, y: 15 }}
-        transition={{ type: 'spring', stiffness: 350, damping: 25 }}
-        className="surface-light rounded-3xl max-w-lg w-full p-5 sm:p-7 shadow-2xl border border-border relative my-8"
-      >
-        
-        {/* Close Button */}
-        <button
-          onClick={handleResetAndClose}
-          className="absolute right-4 top-4 text-muted hover:underline p-1.5 rounded-full hover:bg-border transition-colors cursor-pointer"
-        >
-          <X className="w-5 h-5" />
-        </button>
-
-        {!checkoutOpened ? (
-          <div>
-            
-            {/* Header Badge */}
-            <div className="flex items-center gap-2 text-gr-base font-bold uppercase tracking-wider mb-2">
-              <ShieldCheck className="w-4 h-4 " />
-              <span>Instant Perpetual License</span>
-            </div>
-
-            <h3 className="font-serif-display text-gr-sub font-bold mb-1">
-              Get TypeMaster Lifetime
-            </h3>
-            <p className="text-gr-base mb-5">
-              One-time payment of <span className="line-through text-muted mr-1">$23.99</span><span className="font-bold">{priceDisplay} USD</span> (Launch Price). Zero monthly subscriptions ever.
-            </p>
-
-            <form onSubmit={handlePurchase} className="space-y-4">
-              
-              {/* Email Address */}
-              <div>
-                <label className="block text-gr-base font-semibold mb-1">
-                  Email for License Delivery & Updates:
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="alex@example.com"
-                  className="w-full px-4 py-2.5 surface-light border border-border rounded-xl text-gr-base focus:outline-none focus:border-heading-light"
-                />
-              </div>
-
-              {error && (
-                <p className="text-sm font-semibold text-[#B42318] bg-[#B42318]/5 border border-[#B42318]/20 rounded-xl px-3 py-2">
-                  {error}
-                </p>
-              )}
-
-              {/* Submit Button */}
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                type="submit"
-                disabled={isProcessing}
-                className="w-full py-3.5 px-4 bg-[#0070BA] hover:bg-[#005ea6] text-white disabled:opacity-50 font-bold text-gr-base rounded-2xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer mt-3"
-              >
-                {isProcessing ? (
-                  <div className="flex items-center gap-2">
-                    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    <span>Opening secure checkout...</span>
-                  </div>
-                ) : (
-                  <>
-                    <Lock className="w-4 h-4" />
-                    <span>Pay securely • {priceDisplay} USD</span>
-                  </>
-                )}
-              </motion.button>
-
-            </form>
-
-            <div className="mt-4 text-center text-muted text-xs leading-relaxed">
-              Secure checkout by Lemon Squeezy · Card, PayPal or Apple Pay · Taxes handled at checkout
-            </div>
-
-          </div>
-        ) : (
-          /* CHECKOUT OPENED — AWAITING PAYMENT */
-          <div className="text-center py-2">
-            <div className="w-12 h-12 rounded-full bg-border flex items-center justify-center mx-auto mb-3">
-              <Check className="w-6 h-6" />
-            </div>
-
-            <h3 className="font-serif-display text-gr-sub font-bold mb-1">
-              Secure Checkout Opened
-            </h3>
-            <p className="text-gr-base mb-5">
-              Complete your one-time payment of <span className="font-bold">{priceDisplay} USD</span> in the Lemon Squeezy window. Your perpetual license is registered to <span className="font-semibold">{email}</span> the moment payment succeeds.
-            </p>
-
-            <div className="surface-light rounded-2xl p-4 border border-border mb-5 text-left text-gr-base text-muted space-y-1.5">
-              <p className="font-bold text-text text-sm">After payment:</p>
-              <p className="text-xs sm:text-sm">1. Lemon Squeezy emails your receipt automatically.</p>
-              <p className="text-xs sm:text-sm">2. Use &quot;License Key Lookup&quot; in the top bar to retrieve your key anytime with this email.</p>
-            </div>
-
-            <button
-              onClick={handleResetAndClose}
-              className="w-full py-3.5 surface-dark font-bold text-gr-base rounded-xl cursor-pointer"
-            >
-              Done
-            </button>
-          </div>
-        )}
-
-      </motion.div>
-    </div>
-  );
-};
-
-// ========================
 // APP DETAILS & REQUIREMENTS MODAL
 // ========================
 interface AppDetailsModalProps {
@@ -228,7 +38,7 @@ export const AppDetailsModal: React.FC<AppDetailsModalProps> = ({
 }) => {
   if (!isOpen || !app) return null;
 
-  const priceDisplay = `$${app.priceUsd.toFixed(2)}`;
+  const priceDisplay = app.priceUsd === 0 ? 'Free' : `$${app.priceUsd.toFixed(2)}`;
 
   return (
     <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-4 sm:p-6 bg-bg/65 backdrop-blur-xs overflow-y-auto">
@@ -352,7 +162,7 @@ export const AppDetailsModal: React.FC<AppDetailsModalProps> = ({
         {/* Footer Actions */}
         <div className="flex items-center justify-between pt-4 border-t border-border">
           <div>
-            <span className="text-gr-base font-semibold text-muted uppercase block">Perpetual License</span>
+            <span className="text-gr-base font-semibold text-muted uppercase block">Price</span>
             <span className="font-serif-display font-bold text-gr-sub ">{priceDisplay}</span>
           </div>
 
@@ -373,7 +183,7 @@ export const AppDetailsModal: React.FC<AppDetailsModalProps> = ({
               className="py-3 px-6 surface-dark hover:bg-bg text-gr-base font-bold rounded-xl transition-all shadow-sm flex items-center gap-2 cursor-pointer"
             >
               <ShieldCheck className="w-4 h-4 " />
-              <span>Get License ({priceDisplay})</span>
+              <span>Download Now ({priceDisplay})</span>
             </motion.button>
           </div>
         </div>

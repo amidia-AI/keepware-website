@@ -187,7 +187,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBuyModal, onOpenAuthModal 
                 onClick={onOpenBuyModal}
                 className="hidden sm:flex bg-btn-bg hover:opacity-90 text-gr-base font-semibold px-5 py-2 rounded-full organic-transition shadow-sm items-center justify-center focus-ring text-btn-text"
               >
-                Buy {FEATURED_APP.name} — ${FEATURED_APP.priceUsd}
+                Download {FEATURED_APP.name} — Free
               </button>
             ) : (
               <button
@@ -315,7 +315,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBuyModal, onOpenAuthModal 
                       }}
                       className="w-full bg-btn-bg text-btn-text font-bold py-2.5 rounded-full shadow-md text-center"
                     >
-                      Buy {FEATURED_APP.name} — ${FEATURED_APP.priceUsd}
+                      Download {FEATURED_APP.name} — Free
                     </button>
                   ) : (
                     <button

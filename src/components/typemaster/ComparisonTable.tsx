@@ -23,8 +23,7 @@ export const ComparisonTable: React.FC = () => {
             <div className="grid grid-cols-3 p-4 sm:p-6 items-center">
               <div className="col-span-1 font-semibold pr-2">Price</div>
               <div className="col-span-1 text-center font-bold font-mono text-xs sm:text-sm">
-                <span className="line-through text-muted mr-1.5">$23.99</span>
-                <span className="text-btn-bg">$7.00 once</span>
+                <span className="text-btn-bg">Free</span>
               </div>
               <div className="col-span-1 text-center text-muted font-mono text-xs sm:text-sm">$12/mo</div>
             </div>

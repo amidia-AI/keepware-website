@@ -72,7 +72,7 @@ export const Hero: React.FC<HeroProps> = ({
             transition={{ duration: 0.3, delay: 0.05 }}
             className="text-[#1C2C24] text-sm sm:text-base md:text-lg leading-relaxed font-medium mb-5 sm:mb-6"
           >
-            TypeMaster turns your voice into text on any Windows app — 100% offline, on your own machine. <span className="line-through text-[#1C2C24]/50">$23.99</span> <span className="font-bold text-[#0F1914]">$7.00</span> once (launch price). Never again.
+            TypeMaster turns your voice into text on any Windows app — 100% offline, on your own machine. <span className="font-bold text-[#0F1914]">Free to download.</span> Yours forever.
           </motion.p>
 
           {/* Specs / Badges */}
@@ -100,10 +100,9 @@ export const Hero: React.FC<HeroProps> = ({
               onClick={onOpenBuyModal}
               className="w-full sm:w-auto px-6 sm:px-8 py-3.5 bg-[#E8A33D] hover:bg-[#d99530] text-[#111815] font-bold text-sm sm:text-base rounded-full shadow-md organic-transition focus-ring cursor-pointer text-center inline-flex items-center justify-center gap-2 select-none"
             >
-              <span>Get TypeMaster</span>
+              <span>Download TypeMaster</span>
               <span className="text-[#111815]/40 font-bold">·</span>
-              <span className="line-through text-black/45 text-xs font-normal">$23.99</span>
-              <span className="font-extrabold">$7.00 once</span>
+              <span className="font-extrabold">Free</span>
             </motion.button>
           </motion.div>
           
