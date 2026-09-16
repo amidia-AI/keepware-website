@@ -18,4 +18,13 @@ export const TYPEMASTER_MSI_URL = `${RELEASE_BASE}/Type.Master.V1_0.9.6_x64_en-U
  */
 export function downloadTypeMaster(): void {
   window.open(TYPEMASTER_SETUP_EXE_URL, '_blank', 'noopener,noreferrer');
+  reportDownload();
+}
+
+/**
+ * Fire-and-forget ping to bump the public download counter. Never blocks or
+ * delays the actual download, and failures are silently ignored.
+ */
+function reportDownload(): void {
+  fetch('/api/downloads', { method: 'POST' }).catch(() => {});
 }

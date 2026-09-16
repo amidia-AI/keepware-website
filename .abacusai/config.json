@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "strictness": "strict",
+    "allow": [
+      "Bash(git log *)",
+      "Bash(\"---\" *)",
+      "Bash(git show *)"
+    ]
+  }
+}

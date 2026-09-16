@@ -7,6 +7,7 @@ import featureRequestsRouter from "./server/routes/featureRequests";
 import projectRequestsRouter from "./server/routes/projectRequests";
 import appSubmissionsRouter from "./server/routes/appSubmissions";
 import subscribersRouter from "./server/routes/subscribers";
+import downloadsRouter from "./server/routes/downloads";
 
 async function startServer() {
   const app = express();
@@ -20,6 +21,7 @@ async function startServer() {
   app.use("/api", projectRequestsRouter);
   app.use("/api", appSubmissionsRouter);
   app.use("/api", subscribersRouter);
+  app.use("/api", downloadsRouter);
 
   // Any unmatched /api/* request must return JSON, never the SPA shell.
   app.use("/api", (_req, res) => {

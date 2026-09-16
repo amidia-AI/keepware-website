@@ -18,6 +18,7 @@ export interface DbSchema {
   projectRequests: ProjectRequest[];
   appSubmissions: AppSubmission[];
   subscribers: Subscriber[];
+  downloadCount: number;
 }
 
 function seedDb(): DbSchema {
@@ -26,6 +27,7 @@ function seedDb(): DbSchema {
     projectRequests: [],
     appSubmissions: [],
     subscribers: [],
+    downloadCount: 0,
   };
 }
 
@@ -37,6 +39,7 @@ const db: DbSchema = {
   projectRequests: loaded.projectRequests ?? [],
   appSubmissions: loaded.appSubmissions ?? [],
   subscribers: loaded.subscribers ?? [],
+  downloadCount: loaded.downloadCount ?? 0,
 };
 
 function persist(): Promise<void> {
@@ -127,6 +130,18 @@ export async function createAppSubmission(
   db.appSubmissions.unshift(record);
   await persist();
   return record;
+}
+
+// ---- Downloads ----
+
+export function getDownloadCount(): number {
+  return db.downloadCount;
+}
+
+export async function recordDownload(): Promise<number> {
+  db.downloadCount += 1;
+  await persist();
+  return db.downloadCount;
 }
 
 // ---- Subscribers ----
